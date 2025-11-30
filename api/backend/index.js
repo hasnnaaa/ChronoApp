@@ -25,13 +25,11 @@ app.get('/', (req, res) => {
   res.send('ChronoApp API is running... 🚀');
 });
 
-if (process.env.VERCEL) {
-    module.exports = app;
-} else {
-    const port = 3001;
-    app.listen(port, () => {
-        console.log(`🚀 Server Backend jalan di http://localhost:${port}`);
-    });
+if (!process.env.VERCEL) {
+  const port = 3001;
+  app.listen(port, () => {
+    console.log(`🚀 Server Backend jalan di http://localhost:${port}`);
+  });
 }
 
 export default app;
