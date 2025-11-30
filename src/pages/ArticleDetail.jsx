@@ -1,12 +1,13 @@
 // src/pages/ArticleDetail.jsx
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Calendar, User, ArrowLeft, Clock, Bookmark, Heart } from 'lucide-react'
 import toast from "react-hot-toast";
 import CommentSection from '../components/CommentSection'
 
 export default function ArticleDetail() {
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const [article, setArticle] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -117,13 +118,13 @@ export default function ArticleDetail() {
       
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
-        <Link
-          to="/"
+        <button
+          onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-slate-500 hover:text-black transition-colors px-4 py-2 hover:bg-slate-100 rounded-full"
         >
           <ArrowLeft className="w-4 h-4" />
           <span className="font-medium text-sm">Kembali</span>
-        </Link>
+        </button>
 
         <div className="flex items-center gap-3">
           <button
