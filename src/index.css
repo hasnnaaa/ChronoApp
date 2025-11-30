@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow-y: scroll; 
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(145deg, #fafaf9 0%, #fdfcfb 30%, #fcfaf8 70%, #fafaf9 100%);
+  color: #4a4a4a;
+  min-height: 100vh; /* memastikan background menutupi seluruh viewport */
+  margin: 0;
+  padding: 0;
+}
+
+.ql-container {
+  font-family: 'Georgia', serif;
+  font-size: 1.125rem;
+}
+
+.ql-editor {
+  min-height: 300px;
+  padding: 1rem 0 !important; 
+}
+
+.ql-toolbar {
+  border: none !important; 
+  border-bottom: 1px solid #e2e8f0 !important; 
+  background-color: white;
+  position: sticky;
+  top: 80px; 
+  z-index: 40;
+}
+
+.ql-container.ql-snow {
+  border: none !important; 
+}
+
+*:focus {
+  outline: none;
+}
+
+select {
+  color: #4a4a4a; 
+}
+
+select:focus {
+  outline: none;
+  border-color: #e3bcb4 !important; 
+  box-shadow: 0 0 0 3px rgba(227, 188, 180, 0.2) !important;
+}
+
+select option {
+  background-color: white;
+  color: #4a4a4a; 
+  padding: 8px;
+}
+
+select option:checked,
+select option:hover {
+  background-color: #e7cebe; 
+  color: #4a4a4a;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #e3bcb4 !important;
+  box-shadow: 0 0 0 3px rgba(227, 188, 180, 0.2) !important;
+}
+
+a {
+  color: #e3bcb4;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #d4a89a;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(227, 188, 180, 0.2);
+}
