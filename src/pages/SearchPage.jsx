@@ -1,11 +1,12 @@
 // src/pages/SearchPage.jsx
 import { useEffect, useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
-import { Search as SearchIcon, User, Clock, AlertCircle, ArrowLeft } from 'lucide-react'
+import { Search as SearchIcon, User, Clock, AlertCircle, Hash, ArrowLeft } from 'lucide-react'
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams()
   const query = searchParams.get('q')
+  const category = searchParams.get('category')
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -13,19 +14,28 @@ export default function SearchPage() {
     const fetchResults = async () => {
       setLoading(true)
       try {
-        if (query) {
-          const res = await fetch(`/api/articles/search?q=${query}`)
+        let url = ''
+        
+        // Tentukan URL API berdasarkan parameter yang ada
+        if (category) {
+          url = `http://localhost:3001/api/articles/search?category=${category}`
+        } else if (query) {
+          url = `http://localhost:3001/api/articles/search?q=${query}`
+        }
+
+        if (url) {
+          const res = await fetch(url)
           const data = await res.json()
           setArticles(data)
         }
       } catch (err) {
         console.error(err)
-      } finally {
+        } finally {
         setLoading(false)
       }
     }
     fetchResults()
-  }, [query])
+  }, [query, category])
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-10 min-h-[80vh]">
@@ -39,10 +49,12 @@ export default function SearchPage() {
           Kembali ke Explore
         </Link>
         
-        <p className="text-slate-500 text-xs md:text-sm font-bold uppercase tracking-wider mb-2">Hasil Pencarian</p>
+        <p className="text-slate-500 text-xs md:text-sm font-bold uppercase tracking-wider mb-2">
+          {category ? "Kategori" : "Hasil Pencarian"}
+        </p>
         <h1 className="font-logo font-bold text-2xl md:text-4xl text-slate-900 flex items-center gap-2 md:gap-3">
-          <SearchIcon className="w-6 h-6 md:w-8 md:h-8 text-slate-400" />
-          "{query}"
+          {category ? <Hash className="w-6 h-6 md:w-8 md:h-8 text-slate-400" /> : <SearchIcon className="w-6 h-6 md:w-8 md:h-8 text-slate-400" />}
+          "{category || query}"
         </h1>
       </div>
 

@@ -55,6 +55,17 @@ export const ArticleModel = {
     return data;
   },
 
+  async getByCategory(category) {
+    const { data, error } = await supabase
+      .from('articles')
+      .select('*, profiles(full_name, avatar_url)')
+      .eq('category', category) // Pakai .eq (Equal) biar harus sama persis
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  },
+
   // Update artikel
   async update(id, articleData) {
     const { data, error } = await supabase

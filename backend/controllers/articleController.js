@@ -46,10 +46,17 @@ export const ArticleController = {
 
   async search(req, res) {
     try {
-      const { q } = req.query; 
-      if (!q) return res.json([]); 
-
-      const articles = await ArticleModel.search(q);
+      const { q, category } = req.query; 
+      let articles;
+      if (category) {
+        // Kalau ada parameter category, pakai filter ketat
+        articles = await ArticleModel.getByCategory(category);
+      } else if (q) {
+        // Kalau ada parameter q, pakai search biasa
+        articles = await ArticleModel.search(q);
+      } else {
+        articles = [];
+      }
       res.json(articles);
     } catch (err) {
       res.status(500).json({ error: err.message });

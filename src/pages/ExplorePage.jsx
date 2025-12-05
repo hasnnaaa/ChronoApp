@@ -31,7 +31,7 @@ export default function ExplorePage() {
           {categories.map((cat) => (
             <button 
               key={cat}
-              onClick={() => navigate(`/search?q=${cat}`)}
+              onClick={() => navigate(`/search?category=${cat}`)}
               className="px-4 py-2 bg-slate-50 text-slate-600 rounded-full text-xs md:text-sm font-medium whitespace-nowrap hover:bg-slate-100 transition-colors shrink-0"
             >
               {cat}
@@ -70,7 +70,7 @@ export default function ExplorePage() {
                 {categories.slice(0, 5).map(cat => (
                     <button 
                         key={cat}
-                        onClick={() => navigate(`/search?q=${cat}`)}
+                        onClick={() => navigate(`/search?category=${cat}`)}
                         className="flex items-center gap-2 px-4 py-2 md:px-5 md:py-3 bg-slate-100 rounded-lg text-slate-700 text-sm md:text-base font-medium hover:bg-slate-200 transition-all"
                     >
                         <Hash className="w-3 h-3 md:w-4 md:h-4 text-slate-400" />
